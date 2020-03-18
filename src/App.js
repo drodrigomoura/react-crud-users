@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import ViewList from './components/ViewList'
+import UserForm from './components/UserForm'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends Component {
+  state = {
+    ruta: 'lista'
+  }
+
+  render() {
+    const { ruta } = this.state
+    return (
+      <div className="App">
+        {ruta === 'lista' && <ViewList />}
+        {ruta === 'formulario' && <UserForm />}
+      </div>
+    );
+  }
 }
 
 export default App;
