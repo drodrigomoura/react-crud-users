@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
+import Cabecera from './Cabecera'
+import Lista from './Lista'
 
 export default class ViewList extends Component {
     render() {
         return (
-            'vista lista'
+            <div>
+                <Cabecera />
+                <Lista />
+            </div>
         )
     }
 }
