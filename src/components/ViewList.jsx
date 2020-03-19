@@ -4,10 +4,10 @@ import Lista from './Lista'
 
 export default class ViewList extends Component {
     render() {
-        const { data, handleClick } = this.props
+        const { data, handleClick, nuevoUsuario } = this.props
         return (
             <div>
-                <Cabecera />
+                <Cabecera nuevoUsuario={nuevoUsuario} />
                 <Lista
                     data={data}
                     handleClick={handleClick}

@@ -9,7 +9,7 @@ import UserForm from './components/UserForm'
 class App extends Component {
   state = {
     data: [],
-    ruta: 'lista'
+    ruta: 'formulario'
   }
 
   constructor() {
@@ -25,6 +25,10 @@ class App extends Component {
     })
   }
 
+  nuevoUsuario = () => {
+    this.setState({ ruta: 'formulario' })
+  }
+
   render() {
     const { ruta, data } = this.state
     return (
@@ -32,6 +36,7 @@ class App extends Component {
         {ruta === 'lista' && <ViewList
           data={data}
           handleClick={this.seleccionaUsuario}
+          nuevoUsuario={this.nuevoUsuario}
         />}
         {ruta === 'formulario' && <UserForm />}
       </div>
