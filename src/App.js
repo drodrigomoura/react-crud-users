@@ -9,7 +9,7 @@ import UserForm from './components/UserForm'
 class App extends Component {
   state = {
     data: [],
-    ruta: 'formulario'
+    ruta: 'lista'
   }
 
   constructor() {
@@ -25,6 +25,17 @@ class App extends Component {
     })
   }
 
+  agregarNuevoUsuario = usuario => {
+    axios.post('https://jsonplaceholder.typicode.com/users', usuario)
+      .then(({ data }) => {
+        const newData = this.state.data.concat(data)
+        this.setState({
+          data: newData,
+          ruta: 'lista'
+        })
+      })
+  }
+
   nuevoUsuario = () => {
     this.setState({ ruta: 'formulario' })
   }
@@ -38,7 +49,7 @@ class App extends Component {
           handleClick={this.seleccionaUsuario}
           nuevoUsuario={this.nuevoUsuario}
         />}
-        {ruta === 'formulario' && <UserForm />}
+        {ruta === 'formulario' && <UserForm handleSubmit={this.agregarNuevoUsuario} />}
       </div>
     );
   }

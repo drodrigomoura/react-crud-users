@@ -33,6 +33,8 @@ export default class ViewList extends Component {
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
             //enviar el formulario
+            const { handleSubmit } = this.props
+            handleSubmit(sinErrors)
             e.target.reset()
         }
     }
