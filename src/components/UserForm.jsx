@@ -20,6 +20,14 @@ export default class ViewList extends Component {
         errors: {}
     }
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            ...this.state,
+            ...props.valoresIniciales
+        }
+    }
+
     handleChange = ({ target }) => {
         this.setState({
             [target.name]: target.value
@@ -33,21 +41,27 @@ export default class ViewList extends Component {
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
             //enviar el formulario
-            const { handleSubmit } = this.props
-            handleSubmit(sinErrors)
-            e.target.reset()
+            const { handleUpdate, handleSubmit, valoresIniciales } = this.props
+            if (valoresIniciales.id) {
+                handleUpdate(valoresIniciales.id, sinErrors)
+            } else {
+                handleSubmit(sinErrors)
+            }
+        } else {
+            this.setState({ errors: result })
         }
     }
 
     render() {
         const { errors } = this.state
+        const { valoresIniciales } = this.props
         return (
             <form onSubmit={this.handleSubmit}>
-                <input placeholder="Nombre" name='name' onChange={this.handleChange} />
+                <input defaultValue={valoresIniciales.name} placeholder="Nombre" name='name' onChange={this.handleChange} />
                 {errors.name && <p>{errors.name}</p>}
-                <input placeholder="Email" name='email' onChange={this.handleChange} />
+                <input defaultValue={valoresIniciales.email} placeholder="Email" name='email' onChange={this.handleChange} />
                 {errors.email && <p>{errors.email}</p>}
-                <input placeholder="Website" name='website' onChange={this.handleChange} />
+                <input defaultValue={valoresIniciales.website} placeholder="Website" name='website' onChange={this.handleChange} />
                 {errors.website && <p>{errors.website}</p>}
                 <input type="submit" value="Enviar" />
             </form>
